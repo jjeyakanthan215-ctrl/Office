@@ -63,12 +63,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'esctrix.wsgi.application'
 
-# Database — SQLite for dev, PostgreSQL for production
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
-    )
-}
+# Database — SQLite for dev, PostgreSQL for production (handles Vercel Postgres / Neon out of the box)
+db_url = os.environ.get('DATABASE_URL') or os.environ.get('POSTGRES_URL')
+
+if db_url:
+    DATABASES = {
+        'default': dj_database_url.parse(db_url)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
