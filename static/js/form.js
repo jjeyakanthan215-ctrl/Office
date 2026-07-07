@@ -1,5 +1,5 @@
 /* 
-   EscTrix Secure Contact Form AJAX Handler
+   EscTrix Secure Contact Form — Formspree AJAX Handler
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,26 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'Accept': 'application/json'
                 }
             });
 
-            const result = await response.json();
-
-            if (response.ok && result.success) {
+            if (response.ok) {
                 // Success path
-                statusBox.textContent = result.message;
+                statusBox.textContent = 'Your message has been securely transmitted. Our development team will review it and contact you shortly.';
                 statusBox.className = 'form-status success';
                 form.reset();
             } else {
-                // Validation error path
+                // Error path
+                const result = await response.json();
                 let errorMessage = 'Transmission error: ';
                 if (result.errors) {
-                    errorMessage += Object.entries(result.errors)
-                        .map(([field, err]) => `${field.toUpperCase()}: ${err}`)
+                    errorMessage += result.errors
+                        .map(err => err.message)
                         .join(' | ');
                 } else {
-                    errorMessage += result.message || 'Validation failed.';
+                    errorMessage += 'Validation failed. Please check your inputs.';
                 }
                 statusBox.textContent = errorMessage;
                 statusBox.className = 'form-status error';
