@@ -1,0 +1,31 @@
+{% load static %}
+<header>
+    <div class="nav-container">
+        <a href="{% url 'website:homepage' %}#hero" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="EscTrix Logo">
+            <div class="logo-text">ESC<span>TRIX</span></div>
+        </a>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'website:homepage' %}#hero" class="active">Home</a></li>
+                <li><a href="{% url 'website:homepage' %}#about">About</a></li>
+                <li><a href="{% url 'website:homepage' %}#services">Services</a></li>
+                <li><a href="{% url 'website:homepage' %}#projects">Work</a></li>
+                <li><a href="{% url 'website:homepage' %}#careers">Careers</a></li>
+                
+                {% if user.is_authenticated %}
+                    <li><span style="color: var(--cyan); font-family: var(--font-futuristic); font-size: 0.85rem; letter-spacing: 0.05em; border: 1px solid rgba(0, 240, 255, 0.15); padding: 4px 10px; border-radius: 4px; background: rgba(0, 240, 255, 0.03);">OP // {{ user.username|upper }}</span></li>
+                    <li><a href="{% url 'website:logout' %}" class="btn-cta-nav" style="border-color: var(--purple); color: var(--purple) !important; background: rgba(180, 77, 255, 0.02); box-shadow: 0 0 10px rgba(180, 77, 255, 0.1);">LOGOUT</a></li>
+                {% else %}
+                    <li><a href="{% url 'website:login' %}" style="color: var(--text-muted); font-family: var(--font-futuristic); font-size: 0.85rem; letter-spacing: 0.05em;">LOGIN</a></li>
+                    <li><a href="{% url 'website:signup' %}" class="btn-cta-nav">SIGN UP</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle Navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+    </div>
+</header>

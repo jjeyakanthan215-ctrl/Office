@@ -1,0 +1,31 @@
+{% load static %}
+<footer>
+    <div class="footer-container">
+        <div class="footer-top">
+            <a href="#hero" class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="EscTrix Logo">
+                <div class="logo-text">ESC<span>TRIX</span></div>
+            </a>
+            
+            <ul class="footer-nav">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#careers">Careers</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                &copy; 2026 ESCTRIX. ALL RIGHTS RESERVED. DESIGNED FOR THE FUTURE WITH <span>&hearts;</span>
+            </div>
+            
+            <div>
+                <a href="{% url 'admin:index' %}" class="footer-admin-link" target="_blank">
+                    [ SECURE ADMIN TERMINAL ]
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

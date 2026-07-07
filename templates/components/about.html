@@ -1,0 +1,48 @@
+<section id="about">
+    <div class="section-header reveal">
+        <span class="section-subtitle">Who We Are</span>
+        <h2 class="section-title">Pushing Technological Boundaries</h2>
+        <p class="section-desc">At EscTrix, we merge software engineering, high-end design, and custom motion graphics to create futuristic, high-performance digital ecosystems.</p>
+    </div>
+    
+    <div class="about-grid">
+        <div class="about-details reveal-left">
+            <h3>
+                {% if about_content %}
+                    {{ about_content.title }}
+                {% else %}
+                    Architecting Tomorrow's Solutions Today
+                {% endif %}
+            </h3>
+            <div class="about-text">
+                {% if about_content and about_content.content.paragraphs %}
+                    {% for paragraph in about_content.content.paragraphs %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>We are a forward-thinking digital product agency. We don't just write code; we design futuristic experiences, build highly optimized web platforms, and design premium user experiences tailored to high-growth startups and visionary companies.</p>
+                    <p>Our core philosophy centers around speed, security, and next-level aesthetic execution. We specialize in bringing complex ideas to life through robust backend systems and stunning animations.</p>
+                {% endif %}
+            </div>
+            
+            <a href="#contact" class="btn-primary">
+                WORK WITH US
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+        
+        <div class="about-cards reveal-right delay-200">
+            <div class="glass-card">
+                <span class="card-icon">⚡</span>
+                <h4 class="card-title">Our Mission</h4>
+                <p class="card-text">To empower businesses with high-tech software and striking visual layouts that build trust, engage audiences, and outperform competitors.</p>
+            </div>
+            
+            <div class="glass-card" style="margin-top: 10px;">
+                <span class="card-icon">🌀</span>
+                <h4 class="card-title">Our Vision</h4>
+                <p class="card-text">To be the global benchmark for creative digital development, bridging the gap between mechanical engineering and human artistic design.</p>
+            </div>
+        </div>
+    </div>
+</section>

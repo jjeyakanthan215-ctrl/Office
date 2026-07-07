@@ -1,0 +1,21 @@
+# EscTrix
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+*.env
+.env.local
+db.sqlite3
+media/
+*.log
+.DS_Store
+Thumbs.db
+staticfiles/
+*.egg-info/
+dist/
+build/
+.idea/
+.vscode/

@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | EscTrix Admin{% endblock %}
+
+{% block branding %}
+<div id="branding">
+  <h1 id="site-name">
+    <a href="{% url 'admin:index' %}" style="display: flex; align-items: center; gap: 10px;">
+      <img src="{% static 'images/logo.png' %}" alt="EscTrix" style="height: 30px; width: auto; filter: drop-shadow(0 0 5px rgba(0,240,255,0.5));" />
+      <span>ESCTRIX</span>
+    </a>
+  </h1>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ─── Custom Trailing Cursor for Admin ───
+    const cursorOutline = document.createElement('div');
+    cursorOutline.classList.add('cursor-outline');
+    document.body.appendChild(cursorOutline);
+
+    document.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+            cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        });
+    });
+
+    const hoverElements = document.querySelectorAll('a, button, input[type="submit"], input[type="button"], .button, select, label');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursorOutline.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovering'));
+    });
+});
+</script>
+{% endblock %}

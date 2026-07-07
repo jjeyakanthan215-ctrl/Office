@@ -1,0 +1,278 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/animations.css' %}" />
+<style>
+    body {
+        background-color: var(--bg-dark) !important;
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px) !important;
+        background-size: 50px 50px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    #container {
+        background: transparent !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+    }
+
+    #content {
+        padding: 0 !important;
+    }
+
+    .login-container {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 40px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(180, 77, 255, 0.05);
+        border-top: 3px solid var(--cyan);
+        animation: reveal-scale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .login-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .login-logo img {
+        height: 60px;
+        width: auto;
+        margin-bottom: 12px;
+        filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+        animation: pulseLogo 2.5s infinite ease-in-out;
+    }
+
+    .login-title {
+        font-family: var(--font-futuristic);
+        color: var(--text-main);
+        font-size: 1.1rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .login-subtitle {
+        font-family: var(--font-futuristic);
+        color: var(--purple);
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .form-row {
+        margin-bottom: 22px;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .form-row label {
+        display: block;
+        font-family: var(--font-futuristic);
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 8px;
+    }
+
+    .form-row input {
+        width: 100% !important;
+        background: rgba(5, 8, 20, 0.8) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 4px !important;
+        color: var(--text-main) !important;
+        padding: 12px 16px !important;
+        font-size: 0.95rem !important;
+        transition: var(--transition-fast) !important;
+        box-sizing: border-box !important;
+    }
+
+    .form-row input:focus {
+        border-color: var(--cyan) !important;
+        outline: none !important;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.2) !important;
+    }
+
+    .submit-row {
+        margin-top: 30px;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        text-align: center;
+    }
+
+    .submit-row input[type="submit"] {
+        width: 100% !important;
+        background: linear-gradient(135deg, var(--cyan), var(--purple)) !important;
+        color: var(--bg-dark) !important;
+        padding: 14px !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-family: var(--font-futuristic) !important;
+        font-weight: 700 !important;
+        font-size: 0.9rem !important;
+        letter-spacing: 0.15em !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 15px rgba(0, 240, 255, 0.25) !important;
+        transition: var(--transition-medium) !important;
+    }
+
+    .submit-row input[type="submit"]:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(180, 77, 255, 0.4) !important;
+        color: #ffffff !important;
+    }
+
+    .errornote {
+        background: rgba(255, 56, 56, 0.08) !important;
+        border: 1px solid #ff3838 !important;
+        border-radius: 4px !important;
+        color: #ff3838 !important;
+        padding: 12px !important;
+        font-size: 0.88rem !important;
+        margin-bottom: 20px !important;
+        font-family: var(--font-body) !important;
+    }
+
+    /* Hide standard Django admin header/breadcrumbs/nav-sidebar and toggle buttons on login page */
+    #header, .breadcrumbs, #nav-sidebar, .sidebar-toggle, .toggle-nav-sidebar, #toggle-nav-sidebar {
+        display: none !important;
+    }
+
+    /* Force clean grid-free flex layout to center the login container */
+    .main {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+        grid-template-columns: none !important;
+    }
+
+    /* Reset width constraints and margins on all outer containers */
+    #content-start, #content {
+        margin: 0 auto !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    /* Particles overlay */
+    #particles-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Absolute overrides to hide the Django 5 admin sidebar, titles, and toggle buttons on login page */
+    #header, .breadcrumbs, #nav-sidebar, .sidebar-toggle, .toggle-nav-sidebar, #toggle-nav-sidebar, 
+    #content-title, .content-title, #content > h1, #content-start > h1, #content > h2 {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    .main {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+        grid-template-columns: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+    
+    #content-start, #content {
+        margin: 0 auto !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+</style>
+<canvas id="particles-canvas"></canvas>
+
+<div class="login-container">
+    <div class="login-logo">
+        <img src="{% static 'images/logo.png' %}" alt="EscTrix Logo">
+        <h2 class="login-title">EscTrix Terminal</h2>
+        <span class="login-subtitle">System Access Protocol</span>
+    </div>
+
+    {% if form.errors and not form.non_field_errors %}
+    <p class="errornote">
+    {% if form.errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+    </p>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="errornote">
+        {{ error }}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    <form action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="id_username">Operator ID</label>
+            <input type="text" name="username" autofocus required id="id_username" placeholder="Enter username">
+        </div>
+        <div class="form-row">
+            <label for="id_password">Access Key</label>
+            <input type="password" name="password" required id="id_password" placeholder="Enter password">
+        </div>
+        
+        <input type="hidden" name="next" value="{{ next }}">
+        
+        <div class="submit-row">
+            <input type="submit" value="ESTABLISH CONNECTION">
+        </div>
+    </form>
+</div>
+
+<!-- Load particles on login screen too -->
+<script src="{% static 'js/particles.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Prevent Django from applying default container styling
+        const container = document.getElementById('container');
+        if (container) container.style.boxShadow = 'none';
+    });
+</script>
+{% endblock %}

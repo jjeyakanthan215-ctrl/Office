@@ -1,0 +1,115 @@
+{% load static %}
+<section id="projects">
+    <div class="section-header reveal">
+        <span class="section-subtitle">Our Portfolio</span>
+        <h2 class="section-title">Futuristic Creations</h2>
+        <p class="section-desc">Explore our latest software deployments, interface creations, and animation designs.</p>
+    </div>
+    
+    <!-- Filter Controls -->
+    <div class="portfolio-filter reveal">
+        <button class="filter-btn active" data-filter="all">ALL OPERATIONS</button>
+        <button class="filter-btn" data-filter="software">SOFTWARE</button>
+        <button class="filter-btn" data-filter="web">WEB APPS</button>
+        <button class="filter-btn" data-filter="uiux">UI/UX DESIGN</button>
+        <button class="filter-btn" data-filter="animation">ANIMATION</button>
+    </div>
+    
+    <div class="projects-grid reveal-scale delay-200">
+        {% if projects %}
+            {% for project in projects %}
+                <div class="project-card" data-category="{{ project.category }}">
+                    <div class="project-image">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                        {% else %}
+                            <img src="{% static 'images/projects/project_software.png' %}" alt="Placeholder" loading="lazy">
+                        {% endif %}
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">{{ project.get_category_display }}</div>
+                        <h4 class="project-title">{{ project.title }}</h4>
+                        <p class="project-desc">{{ project.description }}</p>
+                        {% if project.link %}
+                            <a href="{{ project.link }}" target="_blank" class="project-link">
+                                LAUNCH CODE
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <!-- Fallback Static Projects for Initial Demo -->
+            
+            <!-- Project 1 -->
+            <div class="project-card" data-category="software">
+                <div class="project-image">
+                    <img src="{% static 'images/projects/project_software.png' %}" alt="TrixCore Engine" loading="lazy">
+                    <div class="project-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">Software Development</div>
+                    <h4 class="project-title">TrixCore Engine</h4>
+                    <p class="project-desc">A highly secure distributed data parsing engine with low memory footprint and customizable webhook pipelines.</p>
+                    <a href="#contact" class="project-link">
+                        REQUEST ACCESS
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="{% static 'images/projects/project_mobile_app.png' %}" alt="CyberLink Web Gateway" loading="lazy">
+                    <div class="project-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">Web Development</div>
+                    <h4 class="project-title">CyberLink Web Gateway</h4>
+                    <p class="project-desc">Next-generation web portal displaying live telemetry feeds, security logs, and multi-cloud operations.</p>
+                    <a href="#contact" class="project-link">
+                        LIVE PREVIEW
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" data-category="uiux">
+                <div class="project-image">
+                    <img src="{% static 'images/projects/project_uiux.png' %}" alt="Veloce Dashboard" loading="lazy">
+                    <div class="project-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">UI/UX Design</div>
+                    <h4 class="project-title">Veloce Dashboard</h4>
+                    <p class="project-desc">Complete user interface guidelines and dark-mode designs for a Web3 cryptocurrency tracking application.</p>
+                    <a href="#contact" class="project-link">
+                        VIEW DESIGN
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card" data-category="animation">
+                <div class="project-image">
+                    <img src="{% static 'images/projects/project_animation.png' %}" alt="HyperFlux Mechanics" loading="lazy">
+                    <div class="project-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">Animation & Motion</div>
+                    <h4 class="project-title">HyperFlux Mechanics</h4>
+                    <p class="project-desc">Interactive landing page animations featuring WebGL particle mechanics, scroll-linked models, and loading effects.</p>
+                    <a href="#contact" class="project-link">
+                        PLAY ANIMATION
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>

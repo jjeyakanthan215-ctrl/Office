@@ -1,0 +1,63 @@
+<section id="testimonials">
+    <div class="section-header reveal">
+        <span class="section-subtitle">Testimonials</span>
+        <h2 class="section-title">Client Transmissions</h2>
+        <p class="section-desc">See what our clients say about our development process, software quality, and visual assets.</p>
+    </div>
+    
+    <div class="testimonials-slider glass-card reveal">
+        <div class="testimonial-track">
+            {% if testimonials %}
+                {% for t in testimonials %}
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                {% if t.rating == 5 %}★★★★★{% elif t.rating == 4 %}★★★★☆{% else %}★★★☆☆{% endif %}
+                            </div>
+                            <blockquote class="testimonial-quote">
+                                "{{ t.quote }}"
+                            </blockquote>
+                            <div class="testimonial-client">{{ t.client_name|upper }}</div>
+                            <div class="testimonial-company">{{ t.company|upper }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Fallback Slider Slides -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote class="testimonial-quote">
+                            "EscTrix delivered an exceptional API platform in record time. Their code structure is robust, and the frontend animations completely elevated our startup brand. Highly recommended."
+                        </blockquote>
+                        <div class="testimonial-client">ALEX CHEN</div>
+                        <div class="testimonial-company">CEO, NEXUS HEALTH</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote class="testimonial-quote">
+                            "The UI/UX design provided by EscTrix was breathtaking. They captured our dark futuristic brand perfectly. Their team communicates clearly and delivers precise execution on every sprint."
+                        </blockquote>
+                        <div class="testimonial-client">SOPHIA MARTINEZ</div>
+                        <div class="testimonial-company">PRODUCT LEAD, AETHER GRAPHICS</div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Navigation dots -->
+        <div class="slider-controls">
+            {% if testimonials %}
+                {% for t in testimonials %}
+                    <button class="slider-dot {% if forloop.first %}active{% endif %}" aria-label="Go to slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            {% else %}
+                <button class="slider-dot active" aria-label="Go to slide 1"></button>
+                <button class="slider-dot" aria-label="Go to slide 2"></button>
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,55 @@
+<section id="careers">
+    <div class="section-header reveal">
+        <span class="section-subtitle">Careers</span>
+        <h2 class="section-title">Join the EscTrix Directive</h2>
+        <p class="section-desc">We are always scouting for top-tier engineers, designers, and animators. Explore our active positions or send a speculative application.</p>
+    </div>
+    
+    <div class="careers-grid reveal">
+        {% if jobs %}
+            {% for job in jobs %}
+                <div class="glass-card job-card">
+                    <div class="job-details">
+                        <div class="job-header-info">
+                            <span class="job-dept">{{ job.department }}</span>
+                            <span class="job-tag">{{ job.get_job_type_display }}</span>
+                            {% if job.salary_range %}
+                                <span class="job-tag">{{ job.salary_range }}</span>
+                            {% endif %}
+                        </div>
+                        <h3 class="job-title">{{ job.title }}</h3>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>{{ job.location }}</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                <span>{{ job.get_job_type_display }}</span>
+                            </div>
+                        </div>
+                        <div class="job-desc-text">
+                            <p>{{ job.description|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="mailto:{{ job.contact_email }}?subject=Application for {{ job.title }} - EscTrix Careers" class="btn-secondary" style="white-space: nowrap;">
+                            APPLY NOW
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-jobs-box">
+                <span class="card-icon" style="font-size: 3rem; margin-bottom: 15px; display: inline-block;">🛰️</span>
+                <h3 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 10px;">All Stations Occupied</h3>
+                <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 25px auto; font-size: 0.95rem;">
+                    We do not have any open positions right now. However, we are always open to hiring talented developers, UI/UX designers, and animation experts.
+                </p>
+                <a href="mailto:careers@esctrix.com?subject=Speculative Application - EscTrix" class="btn-primary">
+                    SUBMIT SPECULATIVE RESUME
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
