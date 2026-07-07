@@ -21,7 +21,9 @@
                 <div class="project-card" data-category="{{ project.category }}">
                     <div class="project-image">
                         {% if project.image %}
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                            <img src="{{ project.image.url }}" 
+                                 alt="{{ project.title }}" loading="lazy"
+                                 onerror="this.onerror=null; this.src='{% static 'images/projects/project_software.png' %}';">
                         {% else %}
                             <img src="{% static 'images/projects/project_software.png' %}" alt="Placeholder" loading="lazy">
                         {% endif %}
